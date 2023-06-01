@@ -375,6 +375,28 @@ class MemberRepositoryTest {
         for(NestedClosedProjections nestedClosedProjections : result){
             System.out.println("usernameOnly = " + nestedClosedProjections.getUsername());
         }
+    }
 
+    @Test
+    public void natevieQuery(){
+        //given
+        Team teamA = new Team("teamA");
+        entityManager.persist(teamA);
+
+        Member m1 = new Member("m1", 0 , teamA);
+        Member m2 = new Member("m2", 0, teamA);
+        entityManager.persist(m1);
+        entityManager.persist(m2);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        //when
+        Page<MemberProjection> result = memberRepository.findByNativeProjection(PageRequest.of(0, 10));
+        List<MemberProjection> content = result.getContent();
+        for(MemberProjection memberProjection : content) {
+            System.out.println("dd :" + memberProjection.getUsername());
+            System.out.println("ss :" + memberProjection.getTeamname());
+        }
     }
 }
