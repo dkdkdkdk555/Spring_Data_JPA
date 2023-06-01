@@ -370,10 +370,10 @@ class MemberRepositoryTest {
         entityManager.clear();
 
         //when
-        List<UsernameOnlyDto> result = memberRepository.findProjectionsByUsername("m1", UsernameOnlyDto.class);
+        List<NestedClosedProjections> result = memberRepository.findProjectionsByUsername("m1", NestedClosedProjections.class);
 
-        for(UsernameOnlyDto usernameOnly : result){
-            System.out.println("usernameOnly = " + usernameOnly.getUsername());
+        for(NestedClosedProjections nestedClosedProjections : result){
+            System.out.println("usernameOnly = " + nestedClosedProjections.getUsername());
         }
 
     }
